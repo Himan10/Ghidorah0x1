@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "52196307-b9c4-4d28-a528-a4552fd5d773",
+		"name": "Ghidorah",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26451070"
+	},
+	"item": [
+		{
+			"name": "Users Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"test_user\",\n    \"email\": \"test_user@yopmail.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/register/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test_user@yopmail.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/login/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate Scan ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"semgrep_id\": \"97eee639a4fe66b09f85ca6f46bba264037a1039221796e8b4f1aee91988e7f3\",\n    \"snyk_id\": \"None\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/authenticate_scan_id/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"authenticate_scan_id",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Code Analysis",
+			"item": [
+				{
+					"name": "Upload Code ZIP File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/himanshubhatnagar/Ghidorah/test_repo.zip"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hostname}}/upload/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"upload",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "code_review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"analysis_id\": \"da97faf2-6d69-45f5-923e-2d92ddbfab6b\",\n    \"scan_type\": \"semgrep\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/code_review/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"code_review",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_scan_details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/scan_results/get_user_scan_details/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"scan_results",
+								"get_user_scan_details",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Synk HTML",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"analysis_id\": \"da97faf2-6d69-45f5-923e-2d92ddbfab6b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/scan_results/generate_snyk_html/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"scan_results",
+								"generate_snyk_html",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Excel Report",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"scan_type\": \"semgrep\",\n    \"analysis_id\": \"da97faf2-6d69-45f5-923e-2d92ddbfab6b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/scan_results/generate_excel_report/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"scan_results",
+								"generate_excel_report",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_llm_response",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"results\": [\n    {\n      \"check_id\": \"python.lang.security.insecure-random\",\n      \"rule_id\": \"insecure-random\",\n      \"path\": \"example.py\",\n      \"start\": {\"line\": 10, \"col\": 0},\n      \"end\": {\"line\": 10, \"col\": 10},\n      \"message\": \"Insecure use of random number generator. Use 'secrets' instead of 'random' for cryptographic use.\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/get_llm_response/",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"get_llm_response",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
